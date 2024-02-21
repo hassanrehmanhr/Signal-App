@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { io } from "socket.io-client";
+import notificationSound from "./assets/sounds/notification.mp3"
 import "./App.css";
 
 const App = () => {
@@ -22,7 +23,8 @@ const App = () => {
         socket.on("receive-message", (message) => {
             setCurrentSignal(message);
             // Play sound
-            new Audio("/path_to_your_sound.mp3").play();
+            const sound = new Audio(notificationSound);
+            sound.play();
         });
         // Clean up the socket connection
         return () => {
