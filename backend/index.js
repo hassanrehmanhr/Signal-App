@@ -1,6 +1,7 @@
 import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
+import cors from "cors";
 
 const PORT = 5000;
 
@@ -24,7 +25,8 @@ io.on("connection", (socket) => {
 
     socket.on("message", ({ room, message }) => {
         console.log({ room, message });
-        socket.to(room).emit("receive-message", message);
+        const newMessage = `From ${socket.id}: ${message}`;
+        io.emit("receive-message", newMessage);
     });
 
     socket.on("disconnect", () => {
