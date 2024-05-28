@@ -30,7 +30,7 @@ const HeaderSheetContent = () => {
     );
 
     return (
-        <SheetContent>
+        <SheetContent className="max-sm:w-screen">
             <SheetHeader>
                 <SheetTitle>Custom Message</SheetTitle>
                 <SheetDescription>
