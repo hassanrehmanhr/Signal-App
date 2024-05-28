@@ -74,15 +74,15 @@ const HeaderSheetContent = () => {
 
                 {/* Display Message */}
                 <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="message">Message</Label>
-                    <Input
-                        id="message"
-                        value={`${message.role} ${
+                    <div className="col-span-4 p-4 bg-gray-100 rounded-lg">
+                        {`${message.role} ${
                             message.status && "- " + message.status
                         } ${message.room && "- " + message.room}`}
-                        className="col-span-3"
-                        readOnly
-                    />
+
+                        <div className="text-sm text-gray-500 mt-2">
+                            This is how your message will look like.
+                        </div>
+                    </div>
                 </div>
             </div>
 
