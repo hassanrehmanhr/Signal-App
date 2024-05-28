@@ -26,37 +26,13 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { useModal } from "@/components/modals/context";
-
-const rooms = [
-    {
-        value: "lobby",
-        label: "Lobby",
-    },
-    {
-        value: "exam1",
-        label: "Exam 1",
-    },
-    {
-        value: "exam2",
-        label: "Exam 2",
-    },
-    {
-        value: "prep1",
-        label: "Prep 1",
-    },
-    {
-        value: "line1",
-        label: "Line 1",
-    },
-    {
-        value: "line2",
-        label: "Line 2",
-    },
-];
+import { useAtom } from "jotai";
+import { storeAtom } from "@/components/context";
 
 const RoomCard = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
+    const [store] = useAtom(storeAtom);
 
     const { openModal } = useModal();
 
@@ -108,7 +84,7 @@ const RoomCard = () => {
                                         className="w-full justify-between"
                                     >
                                         {value
-                                            ? rooms.find(
+                                            ? store.rooms.find(
                                                   (room) => room.value === value
                                               )?.label
                                             : "Rooms List"}
@@ -123,7 +99,7 @@ const RoomCard = () => {
                                             No rooms found.
                                         </CommandEmpty>
                                         <CommandGroup id="room">
-                                            {rooms.map((room) => (
+                                            {store.rooms.map((room) => (
                                                 <CommandList key={room.value}>
                                                     <CommandItem
                                                         value={room.value}

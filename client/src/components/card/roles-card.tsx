@@ -27,22 +27,14 @@ import {
 } from "@/components/ui/popover";
 
 import { useModal } from "@/components/modals/context";
-
-const roles = [
-    {
-        value: "doctor",
-        label: "Doctor",
-    },
-    {
-        value: "staff",
-        label: "Staff",
-    },
-];
+import { useAtom } from "jotai";
+import { storeAtom } from "@/components/context";
 
 const RolesCard = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
     const { openModal } = useModal();
+    const [store] = useAtom(storeAtom);
 
     const handleSelect = useCallback(
         (currentValue: string) => {
@@ -92,7 +84,7 @@ const RolesCard = () => {
                                         className="w-full justify-between"
                                     >
                                         {value
-                                            ? roles.find(
+                                            ? store.roles.find(
                                                   (role) => role.value === value
                                               )?.label
                                             : "Roles List"}
@@ -107,7 +99,7 @@ const RolesCard = () => {
                                             No roles found.
                                         </CommandEmpty>
                                         <CommandGroup id="role">
-                                            {roles.map((role) => (
+                                            {store.roles.map((role) => (
                                                 <CommandList key={role.value}>
                                                     <CommandItem
                                                         value={role.value}

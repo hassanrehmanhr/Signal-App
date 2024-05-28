@@ -26,29 +26,13 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { useModal } from "@/components/modals/context";
-
-const statuses = [
-    {
-        value: "needed",
-        label: "Needed",
-    },
-    {
-        value: "patient-ready",
-        label: "Patient Ready",
-    },
-    {
-        value: "call-on",
-        label: "Call On",
-    },
-    {
-        value: "patient-check",
-        label: "Patient Check",
-    },
-];
+import { useAtom } from "jotai";
+import { storeAtom } from "@/components/context";
 
 const StatusesCard = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
+    const [store] = useAtom(storeAtom);
     const { openModal } = useModal();
 
     const handleSelect = useCallback(
@@ -99,7 +83,7 @@ const StatusesCard = () => {
                                         className="w-full justify-between"
                                     >
                                         {value
-                                            ? statuses.find(
+                                            ? store.statuses.find(
                                                   (status) =>
                                                       status.value === value
                                               )?.label
@@ -115,7 +99,7 @@ const StatusesCard = () => {
                                             No statuses found.
                                         </CommandEmpty>
                                         <CommandGroup id="status">
-                                            {statuses.map((status) => (
+                                            {store.statuses.map((status) => (
                                                 <CommandList key={status.value}>
                                                     <CommandItem
                                                         value={status.value}
