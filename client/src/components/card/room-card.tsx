@@ -25,6 +25,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
+import { useModal } from "@/components/modals/context";
 
 const rooms = [
     {
@@ -57,6 +58,8 @@ const RoomCard = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
 
+    const { openModal } = useModal();
+
     const handleSelect = useCallback(
         (currentValue: string) => {
             setValue(currentValue === value ? "" : currentValue);
@@ -79,6 +82,7 @@ const RoomCard = () => {
                         <Button
                             variant="ghost"
                             className="border border-gray-300"
+                            onClick={() => openModal("ROOMS")}
                         >
                             <Pencil className="w-5 h-5" />
                             <span className="sr-only">Edit Roles</span>
@@ -108,7 +112,7 @@ const RoomCard = () => {
                                                   (room) => room.value === value
                                               )?.label
                                             : "Rooms List"}
-                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                        <ChevronsUpDown className="ml-2 h-6 w-4 shrink-0 opacity-50" />
                                     </Button>
                                 </PopoverTrigger>
 
@@ -151,7 +155,7 @@ const RoomCard = () => {
             </CardContent>
 
             <CardFooter>
-                <Button onClick={handleClear} className="w-full">
+                <Button onClick={handleClear} className="w-full" size="lg">
                     Clear
                 </Button>
             </CardFooter>

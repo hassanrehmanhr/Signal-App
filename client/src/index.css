@@ -33,6 +33,9 @@
         --ring: 222.2 84% 4.9%;
 
         --radius: 0.5rem;
+
+        /* For rgb(17 17 17 / <alpha-value>) = #111111 */
+        --gray-dark: 17 17 17;
     }
 
     .dark {

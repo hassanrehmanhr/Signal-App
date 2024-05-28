@@ -26,36 +26,23 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { useModal } from "@/components/modals/context";
+
 const roles = [
     {
-        value: "lobby",
-        label: "Lobby",
+        value: "doctor",
+        label: "Doctor",
     },
     {
-        value: "exam1",
-        label: "Exam 1",
-    },
-    {
-        value: "exam2",
-        label: "Exam 2",
-    },
-    {
-        value: "prep1",
-        label: "Prep 1",
-    },
-    {
-        value: "line1",
-        label: "Line 1",
-    },
-    {
-        value: "line2",
-        label: "Line 2",
+        value: "staff",
+        label: "Staff",
     },
 ];
 
 const RolesCard = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
+    const { openModal } = useModal();
 
     const handleSelect = useCallback(
         (currentValue: string) => {
@@ -79,6 +66,7 @@ const RolesCard = () => {
                         <Button
                             variant="ghost"
                             className="border border-gray-300"
+                            onClick={() => openModal("ROLES")}
                         >
                             <Pencil className="w-5 h-5" />
                             <span className="sr-only">Edit Roles</span>
@@ -108,7 +96,7 @@ const RolesCard = () => {
                                                   (role) => role.value === value
                                               )?.label
                                             : "Roles List"}
-                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                        <ChevronsUpDown className="ml-2 h-6 w-4 shrink-0 opacity-50" />
                                     </Button>
                                 </PopoverTrigger>
 
@@ -151,7 +139,7 @@ const RolesCard = () => {
             </CardContent>
 
             <CardFooter>
-                <Button onClick={handleClear} className="w-full">
+                <Button onClick={handleClear} className="w-full" size="lg">
                     Clear
                 </Button>
             </CardFooter>
