@@ -23,9 +23,9 @@ app.use(
 io.on("connection", (socket) => {
     console.log("User Connected", socket.id);
 
-    socket.on("message", ({ room, message }) => {
-        console.log({ room, message });
-        const newMessage = `From ${socket.id}: ${message}`;
+    socket.on("message", ({ message }) => {
+        console.log({ message });
+        const newMessage = `${message}`;
         io.emit("receive-message", newMessage);
     });
 

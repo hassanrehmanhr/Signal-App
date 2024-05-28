@@ -26,27 +26,28 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { useModal } from "@/components/modals/context";
-import { useAtom } from "jotai";
-import { storeAtom } from "@/components/context";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { messageAtom, storeAtom } from "@/components/context";
 
 const RoomCard = () => {
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("");
     const [store] = useAtom(storeAtom);
+    const setMessage = useSetAtom(messageAtom);
+    const message = useAtomValue(messageAtom);
 
     const { openModal } = useModal();
 
     const handleSelect = useCallback(
         (currentValue: string) => {
-            setValue(currentValue === value ? "" : currentValue);
+            setMessage((prev) => ({ ...prev, room: currentValue }));
             setOpen(false);
         },
-        [value]
+        [setMessage]
     );
 
     const handleClear = useCallback(() => {
-        setValue("");
-    }, []);
+        setMessage((prev) => ({ ...prev, room: "" }));
+    }, [setMessage]);
 
     return (
         <Card>
@@ -83,9 +84,11 @@ const RoomCard = () => {
                                         aria-expanded={open}
                                         className="w-full justify-between"
                                     >
-                                        {value
+                                        {message.room
                                             ? store.rooms.find(
-                                                  (room) => room.value === value
+                                                  (room) =>
+                                                      room.value ===
+                                                      message.room
                                               )?.label
                                             : "Rooms List"}
                                         <ChevronsUpDown className="ml-2 h-6 w-4 shrink-0 opacity-50" />
@@ -108,7 +111,7 @@ const RoomCard = () => {
                                                         <Check
                                                             className={cn(
                                                                 "mr-2 h-4 w-4",
-                                                                value ===
+                                                                message.room ===
                                                                     room.value
                                                                     ? "opacity-100"
                                                                     : "opacity-0"
@@ -126,7 +129,8 @@ const RoomCard = () => {
                     </div>
                 </form>
                 <p className="text-sm text-gray-500 mt-2">
-                    Room Selected: {value ? value : "No room selected."}
+                    Room Selected:{" "}
+                    {message.room ? message.room : "No room selected."}
                 </p>
             </CardContent>
 

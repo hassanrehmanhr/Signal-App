@@ -26,26 +26,27 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { useModal } from "@/components/modals/context";
-import { useAtom } from "jotai";
-import { storeAtom } from "@/components/context";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { messageAtom, storeAtom } from "@/components/context";
 
 const StatusesCard = () => {
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("");
     const [store] = useAtom(storeAtom);
     const { openModal } = useModal();
+    const setMessage = useSetAtom(messageAtom);
+    const message = useAtomValue(messageAtom);
 
     const handleSelect = useCallback(
         (currentValue: string) => {
-            setValue(currentValue === value ? "" : currentValue);
+            setMessage((prev) => ({ ...prev, status: currentValue }));
             setOpen(false);
         },
-        [value]
+        [setMessage]
     );
 
     const handleClear = useCallback(() => {
-        setValue("");
-    }, []);
+        setMessage((prev) => ({ ...prev, status: "" }));
+    }, [setMessage]);
 
     return (
         <Card>
@@ -82,10 +83,11 @@ const StatusesCard = () => {
                                         aria-expanded={open}
                                         className="w-full justify-between"
                                     >
-                                        {value
+                                        {message.status
                                             ? store.statuses.find(
                                                   (status) =>
-                                                      status.value === value
+                                                      status.value ===
+                                                      message.status
                                               )?.label
                                             : "Statuses List"}
                                         <ChevronsUpDown className="ml-2 h-6 w-4 shrink-0 opacity-50" />
@@ -108,7 +110,7 @@ const StatusesCard = () => {
                                                         <Check
                                                             className={cn(
                                                                 "mr-2 h-4 w-4",
-                                                                value ===
+                                                                message.status ===
                                                                     status.value
                                                                     ? "opacity-100"
                                                                     : "opacity-0"
@@ -126,7 +128,8 @@ const StatusesCard = () => {
                     </div>
                 </form>
                 <p className="text-sm text-gray-500 mt-2">
-                    Status Selected: {value ? value : "No status selected."}
+                    Status Selected:{" "}
+                    {message.status ? message.status : "No status selected."}
                 </p>
             </CardContent>
 

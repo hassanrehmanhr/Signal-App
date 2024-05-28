@@ -1,4 +1,5 @@
 import { atomWithStorage } from "jotai/utils";
+import { atom } from "jotai";
 
 type Common = {
     value: string;
@@ -10,6 +11,13 @@ interface Store {
     statuses: Common[];
     rooms: Common[];
 }
+
+export const messageAtom = atom({
+    role: "",
+    status: "",
+    room: "",
+});
+
 export const storeAtom = atomWithStorage<Store>("addNewData", {
     roles: [
         {

@@ -67,7 +67,7 @@ const Roles = () => {
                                 key={role.value}
                                 className="flex items-center justify-between py-2 border-b border-gray-200"
                             >
-                                <span>{role.label}</span>
+                                <span>{role.value}</span>
 
                                 <Button
                                     variant="ghost"

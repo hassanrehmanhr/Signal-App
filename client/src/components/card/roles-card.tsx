@@ -27,26 +27,27 @@ import {
 } from "@/components/ui/popover";
 
 import { useModal } from "@/components/modals/context";
-import { useAtom } from "jotai";
-import { storeAtom } from "@/components/context";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { messageAtom, storeAtom } from "@/components/context";
 
 const RolesCard = () => {
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("");
     const { openModal } = useModal();
     const [store] = useAtom(storeAtom);
+    const setMessage = useSetAtom(messageAtom);
+    const message = useAtomValue(messageAtom);
 
     const handleSelect = useCallback(
         (currentValue: string) => {
-            setValue(currentValue === value ? "" : currentValue);
+            setMessage((prev) => ({ ...prev, role: currentValue }));
             setOpen(false);
         },
-        [value]
+        [setMessage]
     );
 
     const handleClear = useCallback(() => {
-        setValue("");
-    }, []);
+        setMessage((prev) => ({ ...prev, role: "" }));
+    }, [setMessage]);
 
     return (
         <Card>
@@ -83,9 +84,9 @@ const RolesCard = () => {
                                         aria-expanded={open}
                                         className="w-full justify-between"
                                     >
-                                        {value
+                                        {message.role
                                             ? store.roles.find(
-                                                  (role) => role.value === value
+                                                  (role) => role.value === message.role
                                               )?.label
                                             : "Roles List"}
                                         <ChevronsUpDown className="ml-2 h-6 w-4 shrink-0 opacity-50" />
@@ -108,7 +109,7 @@ const RolesCard = () => {
                                                         <Check
                                                             className={cn(
                                                                 "mr-2 h-4 w-4",
-                                                                value ===
+                                                                message.role ===
                                                                     role.value
                                                                     ? "opacity-100"
                                                                     : "opacity-0"
@@ -126,7 +127,8 @@ const RolesCard = () => {
                     </div>
                 </form>
                 <p className="text-sm text-gray-500 mt-2">
-                    Role Selected: {value ? value : "No role selected."}
+                    Role Selected:{" "}
+                    {message.role ? message.role : "No role selected."}
                 </p>
             </CardContent>
 
