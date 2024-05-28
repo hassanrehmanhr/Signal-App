@@ -3,9 +3,8 @@ import Button from "@/components/ui/button";
 
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import HeaderSheetContent from "../drawer/header-sheet-content";
-import { SocketIoType } from "@/type";
 
-const Header = (socket: SocketIoType) => {
+const Header = () => {
     return (
         <>
             <header className="bg-gray-900 text-white py-4 px-6 flex items-center justify-between">
@@ -19,7 +18,7 @@ const Header = (socket: SocketIoType) => {
                         </Button>
                     </SheetTrigger>
 
-                    <HeaderSheetContent socket={socket} />
+                    <HeaderSheetContent />
                 </Sheet>
             </header>
         </>
