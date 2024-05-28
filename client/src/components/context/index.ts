@@ -25,55 +25,55 @@ export const messageAtom = atom({
 export const storeAtom = atomWithStorage<Store>("addNewData", {
     roles: [
         {
-            value: "doctor",
+            value: "Doctor",
             label: "Doctor",
         },
         {
-            value: "staff",
+            value: "Staff",
             label: "Staff",
         },
     ],
     statuses: [
         {
-            value: "needed",
+            value: "Needed",
             label: "Needed",
         },
         {
-            value: "patientready",
+            value: "Patient Ready",
             label: "Patient Ready",
         },
         {
-            value: "callon",
+            value: "Call On",
             label: "Call On",
         },
         {
-            value: "patientcheck",
+            value: "Patient Check",
             label: "Patient Check",
         },
     ],
     rooms: [
         {
-            value: "lobby",
+            value: "Lobby",
             label: "Lobby",
         },
         {
-            value: "exam1",
+            value: "Exam 1",
             label: "Exam 1",
         },
         {
-            value: "exam2",
+            value: "Exam 2",
             label: "Exam 2",
         },
         {
-            value: "prep1",
+            value: "Prep 1",
             label: "Prep 1",
         },
         {
-            value: "line1",
+            value: "Line 1",
             label: "Line 1",
         },
         {
-            value: "line2",
+            value: "Line 2",
             label: "Line 2",
         },
     ],

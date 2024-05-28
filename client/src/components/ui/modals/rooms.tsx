@@ -37,7 +37,7 @@ const Rooms = () => {
             rooms: [
                 ...prev.rooms,
                 {
-                    value: input.toLowerCase(),
+                    value: input,
                     label: input,
                 },
             ],

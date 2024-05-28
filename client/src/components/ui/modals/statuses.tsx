@@ -37,7 +37,7 @@ const Statuses = () => {
             statuses: [
                 ...prev.statuses,
                 {
-                    value: input.toLowerCase(),
+                    value: input,
                     label: input,
                 },
             ],

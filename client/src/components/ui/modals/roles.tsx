@@ -36,7 +36,7 @@ const Roles = () => {
             roles: [
                 ...prev.roles,
                 {
-                    value: input.toLowerCase(),
+                    value: input,
                     label: input,
                 },
             ],
