@@ -9,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, Pencil } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -72,7 +72,19 @@ const RoomCard = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Room</CardTitle>
+                <CardTitle>
+                    <div className="flex justify-between items-center">
+                        <h2>Room</h2>
+
+                        <Button
+                            variant="ghost"
+                            className="border border-gray-300"
+                        >
+                            <Pencil className="w-5 h-5" />
+                            <span className="sr-only">Edit Roles</span>
+                        </Button>
+                    </div>
+                </CardTitle>
                 <CardDescription>
                     Select a status to send in your message.
                 </CardDescription>
@@ -138,8 +150,10 @@ const RoomCard = () => {
                 </p>
             </CardContent>
 
-            <CardFooter className="flex justify-between">
-                <Button onClick={handleClear}>Clear</Button>
+            <CardFooter>
+                <Button onClick={handleClear} className="w-full">
+                    Clear
+                </Button>
             </CardFooter>
         </Card>
     );
