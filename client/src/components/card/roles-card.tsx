@@ -74,7 +74,7 @@ const RolesCard = () => {
                     </div>
                 </CardTitle>
                 <CardDescription>
-                    Select a status to send in your message.
+                    Select a role to send in your message.
                 </CardDescription>
             </CardHeader>
 

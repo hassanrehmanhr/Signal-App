@@ -90,7 +90,7 @@ const RoomCard = () => {
                     </div>
                 </CardTitle>
                 <CardDescription>
-                    Select a status to send in your message.
+                    Select a room to send in your message.
                 </CardDescription>
             </CardHeader>
 

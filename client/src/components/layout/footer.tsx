@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-        <footer className="bg-primary text-white py-4 px-6 flex items-center justify-between">
+        <footer className="bg-gray-900 text-white py-4 px-6 flex items-center justify-between">
             {/* Right Reserved */}
             <p className="text-xs sm:text-sm">
                 &copy; {new Date().getFullYear()} Signal Message. All Rights
