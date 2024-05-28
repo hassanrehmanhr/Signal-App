@@ -1,6 +1,10 @@
 import { atomWithStorage } from "jotai/utils";
 import { atom } from "jotai";
 
+import { io } from "socket.io-client";
+
+export const socket = io("http://localhost:5000");
+
 type Common = {
     value: string;
     label: string;

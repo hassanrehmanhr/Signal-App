@@ -11,6 +11,7 @@ import {
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { socket } from "@/components/context";
 
 const HeaderSheetContent = () => {
     const [message, setMessage] = useState({
@@ -28,6 +29,22 @@ const HeaderSheetContent = () => {
         },
         [setMessage]
     );
+
+    const handleSubmit = useCallback(() => {
+        if (message.role.trim() === "") return;
+        if (message.status.trim() === "") return;
+        if (message.room.trim() === "") return;
+
+        socket.emit("message", {
+            message: `${message.role} - ${message.status} - ${message.room}`,
+        });
+
+        setMessage({
+            role: "",
+            status: "",
+            room: "",
+        });
+    }, [message]);
 
     return (
         <SheetContent className="max-sm:w-screen">
@@ -88,7 +105,12 @@ const HeaderSheetContent = () => {
 
             <SheetFooter>
                 <SheetClose asChild>
-                    <Button type="submit" className="w-full" size="lg">
+                    <Button
+                        type="submit"
+                        className="w-full"
+                        size="lg"
+                        onClick={handleSubmit}
+                    >
                         Send Message
                     </Button>
                 </SheetClose>
