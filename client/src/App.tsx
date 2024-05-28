@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { socket } from "@/components/context";
+import { useState, useEffect, useMemo } from "react";
+import { io } from "socket.io-client";
 
 // Jotai Import
 import { useAtomValue, useSetAtom } from "jotai";
@@ -19,6 +19,8 @@ import Button from "./components/ui/button";
 import clsx from "clsx";
 
 function App() {
+    const socket = useMemo(() => io("http://localhost:5000"), []);
+
     const [currentSignal, setCurrentSignal] = useState("");
 
     const message = useAtomValue(messageAtom);
@@ -33,7 +35,7 @@ function App() {
         return () => {
             socket.disconnect();
         };
-    }, []);
+    }, [socket]);
 
     const handleSendMessage = () => {
         socket.emit("message", {
@@ -48,7 +50,7 @@ function App() {
     return (
         <>
             <div className="flex flex-col h-screen">
-                <Header />
+                <Header socket={socket} />
 
                 <main className="flex-1 container py-4">
                     {currentSignal && (

@@ -11,9 +11,9 @@ import {
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { socket } from "@/components/context";
+import { SocketIoType } from "@/type";
 
-const HeaderSheetContent = () => {
+const HeaderSheetContent = (socket: SocketIoType) => {
     const [message, setMessage] = useState({
         role: "",
         status: "",
@@ -44,7 +44,7 @@ const HeaderSheetContent = () => {
             status: "",
             room: "",
         });
-    }, [message]);
+    }, [message, socket]);
 
     return (
         <SheetContent className="max-sm:w-screen">
