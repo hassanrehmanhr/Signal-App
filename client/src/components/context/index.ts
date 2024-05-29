@@ -3,7 +3,7 @@ import { atom } from "jotai";
 
 import { io } from "socket.io-client";
 
-export const socket = io("http://localhost:5000");
+export const socket = io("https://signal-app-etqx.onrender.com");
 
 type Common = {
     value: string;
