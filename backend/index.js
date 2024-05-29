@@ -4,21 +4,27 @@ import { createServer } from "http";
 import cors from "cors";
 
 const PORT = 5000;
+const FRONTEND_URL = "https://signal-app-three.vercel.app";
 
 const app = express();
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
     cors: {
-        origin: "https://signal-app-three.vercel.app/",
+        origin: FRONTEND_URL,
+        methods: ["GET", "POST"]
     },
 });
 
 app.use(
     cors({
-        origin: "https://signal-app-three.vercel.app/",
+        origin: FRONTEND_URL,
+        methods: ["GET", "POST"],
+        credentials: true
     })
 );
+
+app.use(express.json());
 
 io.on("connection", (socket) => {
     console.log("User Connected", socket.id);
