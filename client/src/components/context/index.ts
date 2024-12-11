@@ -32,6 +32,14 @@ export const storeAtom = atomWithStorage<Store>("addNewData", {
             value: "Staff",
             label: "Staff",
         },
+        {
+            value: "Assistant",
+            label: "Assistant",
+        },
+        {
+            value: "Hygenist",
+            label: "Hygenist",
+        },
     ],
     statuses: [
         {
@@ -69,12 +77,12 @@ export const storeAtom = atomWithStorage<Store>("addNewData", {
             label: "Prep 1",
         },
         {
-            value: "Line 1",
-            label: "Line 1",
+            value: "Room 1",
+            label: "Room 1",
         },
         {
-            value: "Line 2",
-            label: "Line 2",
+            value: "Room 2",
+            label: "Room 2",
         },
     ],
 });

@@ -78,7 +78,7 @@ function App() {
                         <div className="mt-8">
                             <h2 className="text-md font-semibold">Message</h2>
 
-                            <div className="w-fit">
+                            <div className="w-full h-screen items-center justify-center">
                                 <div className="px-4 py-2 bg-gray-100 rounded-lg font-medium mt-1.5">
                                     {message.role} - {message.status} -{" "}
                                     {message.room}

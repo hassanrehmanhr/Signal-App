@@ -9,28 +9,13 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Check, ChevronsUpDown, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "@/components/ui/command";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
 import { useModal } from "@/components/modals/context";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { messageAtom, storeAtom } from "@/components/context";
 
 const RoomCard = () => {
-    const [open, setOpen] = useState(false);
     const [store] = useAtom(storeAtom);
     const setMessage = useSetAtom(messageAtom);
     const message = useAtomValue(messageAtom);
@@ -38,9 +23,8 @@ const RoomCard = () => {
     const { openModal } = useModal();
 
     const handleSelect = useCallback(
-        (currentValue: string) => {
+        (currentValue) => {
             setMessage((prev) => ({ ...prev, room: currentValue }));
-            setOpen(false);
         },
         [setMessage]
     );
@@ -62,7 +46,7 @@ const RoomCard = () => {
                             onClick={() => openModal("ROOMS")}
                         >
                             <Pencil className="w-5 h-5" />
-                            <span className="sr-only">Edit Roles</span>
+                            <span className="sr-only">Edit Rooms</span>
                         </Button>
                     </div>
                 </CardTitle>
@@ -76,61 +60,26 @@ const RoomCard = () => {
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
                             <Label>Room</Label>
-                            <Popover open={open} onOpenChange={setOpen}>
-                                <PopoverTrigger asChild>
+                            <div className="flex flex-wrap gap-2">
+                                {store.rooms.map((room) => (
                                     <Button
-                                        variant="outline"
-                                        role="combobox"
-                                        aria-expanded={open}
-                                        className="w-full justify-between"
+                                        key={room.value}
+                                        variant={
+                                            message.room === room.value
+                                                ? "solid"
+                                                : "outline"
+                                        }
+                                        onClick={() => handleSelect(room.value)}
                                     >
-                                        {message.room
-                                            ? store.rooms.find(
-                                                  (room) =>
-                                                      room.value ===
-                                                      message.room
-                                              )?.label
-                                            : "Rooms List"}
-                                        <ChevronsUpDown className="ml-2 h-6 w-4 shrink-0 opacity-50" />
+                                        {room.label}
                                     </Button>
-                                </PopoverTrigger>
-
-                                <PopoverContent className="w-[200px] p-0">
-                                    <Command>
-                                        <CommandInput placeholder="Search room..." />
-                                        <CommandEmpty>
-                                            No rooms found.
-                                        </CommandEmpty>
-                                        <CommandGroup id="room">
-                                            {store.rooms.map((room) => (
-                                                <CommandList key={room.value}>
-                                                    <CommandItem
-                                                        value={room.value}
-                                                        onSelect={handleSelect}
-                                                    >
-                                                        <Check
-                                                            className={cn(
-                                                                "mr-2 h-4 w-4",
-                                                                message.room ===
-                                                                    room.value
-                                                                    ? "opacity-100"
-                                                                    : "opacity-0"
-                                                            )}
-                                                        />
-                                                        {room.label}
-                                                    </CommandItem>
-                                                </CommandList>
-                                            ))}
-                                        </CommandGroup>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </form>
                 <p className="text-sm text-gray-500 mt-2">
-                    Room Selected:{" "}
-                    {message.room ? message.room : "No room selected."}
+                    Room Selected: {message.room ? message.room : "No room selected"}
                 </p>
             </CardContent>
 
