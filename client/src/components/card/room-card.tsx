@@ -23,7 +23,7 @@ const RoomCard = () => {
     const { openModal } = useModal();
 
     const handleSelect = useCallback(
-        (currentValue) => {
+        (currentValue: string) => {
             setMessage((prev) => ({ ...prev, room: currentValue }));
         },
         [setMessage]

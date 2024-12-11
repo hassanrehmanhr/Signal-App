@@ -22,7 +22,7 @@ const RolesCard = () => {
     const message = useAtomValue(messageAtom);
 
     const handleSelect = useCallback(
-        (currentValue) => {
+        (currentValue: string) => {
             setMessage((prev) => ({ ...prev, role: currentValue }));
         },
         [setMessage]

@@ -23,7 +23,7 @@ const StatusesCard = () => {
     const { openModal } = useModal();
 
     const handleSelect = useCallback(
-        (currentValue) => {
+        (currentValue: string) => {
             setMessage((prev) => ({ ...prev, status: currentValue }));
         },
         [setMessage]
